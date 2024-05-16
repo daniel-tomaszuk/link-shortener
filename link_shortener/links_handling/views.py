@@ -1,3 +1,9 @@
 from django.shortcuts import render
+from links_handling.models import AddressUrl
+from links_handling.serializers import CreateShortUrlModelSerializer
+from rest_framework.generics import CreateAPIView
 
-# Create your views here.
+
+class ShortUrlCreateAPIView(CreateAPIView):
+    queryset = AddressUrl.objects.all()
+    serializer_class = CreateShortUrlModelSerializer
