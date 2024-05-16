@@ -1,16 +1,10 @@
 import string
 from datetime import datetime
-from time import sleep
 
 from django.conf import settings
 from django.core.exceptions import BadRequest
 from django.db import models
-from django.http import HttpResponseBadRequest
 from django.urls import reverse
-from rest_framework import status
-from rest_framework.exceptions import APIException
-
-from link_shortener.settings import APP_BASE_URL
 
 
 class AddressUrl(models.Model):
