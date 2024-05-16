@@ -1,4 +1,5 @@
 from django.urls import path
+
 from links_handling.views import ShortUrlCreateAPIView
 
 urlpatterns = [
