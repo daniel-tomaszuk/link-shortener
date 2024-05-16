@@ -1,5 +1,6 @@
-from links_handling.models import AddressUrl
 from rest_framework import serializers
+
+from links_handling.models import AddressUrl
 
 
 class CreateShortUrlModelSerializer(serializers.ModelSerializer):
