@@ -8,6 +8,7 @@ class CreateShortUrlModelSerializer(serializers.ModelSerializer):
         max_length=32,
         required=False,
         allow_blank=True,
+        read_only=True,
     )
 
     class Meta:

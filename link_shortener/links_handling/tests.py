@@ -32,6 +32,29 @@ class TestShortUrlCreate(BaseTestCase):
         # and object created in the DB
         assert AddressUrl.objects.filter(original_url=data["original_url"]).exists()
 
+    def test_create_shortened_url__success__passed_short_url_ignored(self, client):
+        # Given payload is correct
+        data: dict = self.get_create_body()
+
+        # and short url is present inside the payload
+        payload_short_url = "example.com/abcd"
+        data["short_url"] = payload_short_url
+
+        # and URL as expected
+        url: str = reverse("create-short-url")
+
+        # When client posts new shortened URL with proper payload
+        response = client.post(url, data=data)
+
+        # Then response as expected
+        assert response.status_code == status.HTTP_201_CREATED
+
+        # and object created in the DB
+        assert AddressUrl.objects.filter(original_url=data["original_url"]).exists()
+
+        # and short url from payload is ignored
+        assert not AddressUrl.objects.filter(short_url=payload_short_url).exists()
+
     @freeze_time("2024-05-16")
     @pytest.mark.parametrize(
         "original_url, original_url_hash, expected_short_url",
